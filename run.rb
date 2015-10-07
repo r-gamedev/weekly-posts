@@ -65,12 +65,19 @@ end
 # Generates a post and submits it
 def make_post(dir)
   puts "make a post for #{dir} at #{Time.now}"
+
+  # Load
   config = YAML.load_file("#{dir}/config.yaml")
   internal = YAML.load_file("#{dir}/internal.yaml")
   posts = YAML.load_file("#{dir}/posts.yaml")
   format = File.read("#{dir}/format.md")
-  which = internal["counter"] % posts.size
-  post = posts[which]
+
+  # take the first element and move it to the end, save the change
+  post = posts.shift
+  posts.push post
+  File.open("#{dir}/posts.yaml", "w") { |f| f.write posts.to_yaml }
+
+  # generate variables
   variables = config["variables"].merge(post["variables"]).merge(internal)
 
   #symbolize the hash
@@ -82,7 +89,13 @@ def make_post(dir)
   internal["counter"] += 1;
   File.open("#{dir}/internal.yaml", "w") { |f| f.write internal.to_yaml }
 
-  connect_and_post(@access_conf, title, text)
+  connect_and_post(@access_conf, title, text, config["flair"])
+
+  # save the changes to the git
+  `git pull`
+  `git add /threads*`
+  `git commit -m "Post updates"`
+  `git push`
 
   # reschedule
   @scheduler.in '1m', overlap: false do
@@ -97,7 +110,9 @@ end
 ################################################################################
 
 # register the date-times
-register()
+# register()
+
+make_post('threads/mm')
 
 # wait
 binding.pry

@@ -1,7 +1,7 @@
 require 'pry'
 
 # Connect to reddit and make the post.
-def connect_and_post(access_conf, title, text)
+def connect_and_post(access_conf, title, text, flair)
   r = Redd.it(:script, 
     access_conf['client_id'],
     access_conf['client_secret'],
@@ -32,16 +32,17 @@ def connect_and_post(access_conf, title, text)
       p.unset_sticky
     end
     post.set_sticky
+    post.set_flair(flair)
     dd.set_sticky
   end
 rescue
   binding.pry
 end
 
-### Override for testing
-# def connect_and_post(access_conf, title, text)
-#   puts "Would have posted #{title} at #{Time.now}\n\n#{text}"
-# end
+## Override for testing
+def connect_and_post(access_conf, title, text)
+  puts "Would have posted #{title} at #{Time.now}\n\n#{text}"
+end
 
 # Helper for connect_and_post;
 # performs the action in the block until it is successful;
