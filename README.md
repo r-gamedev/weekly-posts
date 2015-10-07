@@ -12,9 +12,18 @@ Generates a post body from `format.yaml`, replacing strings of the format `%{nam
 
 Posts to /r/gamedev when the chosen time has arrived, replacing the currently stickied weekly thread with the new one.
 
+# Submitting posts
+
+Modify the appropriate file and submit a pull request.
+
+* `posts.yaml` for new random posts.
+* `once.yaml` for new one-time-use posts. (not yet implemented)
+* `format.yaml` to improve the post formatting.
+
 # TODO
 
-* One-time-use Timed posts
+* One-time-use Timed posts `once.yaml`
   * By post immediately before date
   * By post immediately after date
   * By counter value
+  * Move from `once.yaml` to `once-used.yaml`
