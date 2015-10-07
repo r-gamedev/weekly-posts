@@ -1,0 +1,24 @@
+---
+# on counter 50, not kept; moved to once-again.yaml when used
+- on_counter: 50
+  variables:
+    tagline: nothing nothing
+    question: nothing nothing nothing
+# on counter 100, kept, moved to posts.yaml when used
+- on_counter: 100
+  keep: true
+  variables:
+    tagline: nothing nothing
+    question: nothing nothing nothing
+    bonus: |
+      just literally paragraphs of text
+# before 04/01, used again; stays in once.yaml
+- before_date: '04/01'
+  again: true
+  variables:
+    tagline: April Fools
+    question: Something something pranks.
+    bonus: |+
+      just literally paragraphs of text
+
+      not even kidding
