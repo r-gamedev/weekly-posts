@@ -5,5 +5,6 @@ title: "Marketing Monday #%{counter} - %{tagline}"  # The title, %variables% wil
 flair: MM                                           # The flair to give the post
 keep: true                                          # Should the entry be kept once used? Or deleted?
 variables:                                          # Some default variables. Overwrite them in each entry
-    tagline: Uninitialized
-    question: Uninitialized
+  tagline: Uninitialized
+  question: Uninitialized
+  extra: ""

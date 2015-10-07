@@ -20,6 +20,8 @@ Post your marketing material like websites, email pitches, trailers, presskits, 
 
 **Bonus Question:** %{question}
 
+%{extra}
+
 ---
 
 [All Previous Marketing Mondays](%{past_url})

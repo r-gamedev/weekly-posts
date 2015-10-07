@@ -1,10 +1,10 @@
-frequency: weekly                                   # How often to create the post, [daily|weekly]
 day: monday                                         # What day, only checked if frequency: weekly
-time: 18:00                                         # The time the post should go live
-time-variance: 0                                    # How many minutes should the live time vary?
-title: "Marketing Monday #%counter% - %tagline%"    # The title, %variables% will be gsubbed with their corresponding value
+time: '18:00 GMT-0700'                              # The time the post should go live
+time-variance: 20                                   # How many minutes should the live time vary?
+title: "Marketing Monday #%{counter} - %{tagline}"  # The title, %variables% will be gsubbed with their corresponding value
 flair: MM                                           # The flair to give the post
 keep: true                                          # Should the entry be kept once used? Or deleted?
 variables:                                          # Some default variables. Overwrite them in each entry
-    tagline: Default Value
-    #counter: 74                                    # Set interally, but may be used as a variable
+    tagline: Uninitialized
+    question: Uninitialized
+    extra: ""
