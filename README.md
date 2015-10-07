@@ -1,6 +1,6 @@
 # /r/Gamedev Weekly Posts
 
-While running, automatically schedules posts found in `/threads`.
+While running, automatically schedules posts found in `/threads` (excluding `example`, of course).
 
 Selects a post to make from `posts.yaml` based off the modulo of `internal.yaml > post count`.
 
