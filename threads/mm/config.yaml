@@ -1,0 +1,9 @@
+day: monday                                         # What day, only checked if frequency: weekly
+time: '18:00 GMT-0700'                              # The time the post should go live
+time-variance: 20                                   # How many minutes should the live time vary?
+title: "Marketing Monday #%{counter} - %{tagline}"  # The title, %variables% will be gsubbed with their corresponding value
+flair: MM                                           # The flair to give the post
+keep: true                                          # Should the entry be kept once used? Or deleted?
+variables:                                          # Some default variables. Overwrite them in each entry
+    tagline: Uninitialized
+    question: Uninitialized

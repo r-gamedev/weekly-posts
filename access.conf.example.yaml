@@ -1,0 +1,6 @@
+# Fill in and rename to access.conf.yaml
+client_id:  # Create an app at https://www.reddit.com/prefs/apps/
+secret:     # Create an app at https://www.reddit.com/prefs/apps/
+username:   # your username
+password:   # your password
+useragent: "/r/gamedev autoposter v0.0.1"
