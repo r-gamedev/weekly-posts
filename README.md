@@ -2,7 +2,7 @@
 
 While running, automatically schedules posts found in `/threads` (excluding `example`, of course).
 
-Selects a post to make from `posts.yaml` based off the modulo of `internal.yaml > post count`.
+Selects the top post from `posts.yaml` and moves it to the bottom.
 
 Gathers variables from `internal.yaml`, `posts.yaml > [selected] > variables`, and `conf.yaml`. With the priority in that order.
 
@@ -16,14 +16,15 @@ Posts to /r/gamedev when the chosen time has arrived, replacing the currently st
 
 Modify the appropriate file and submit a pull request.
 
-* `posts.yaml` for new random posts.
+* `posts.yaml` for new regular posts.
 * `once.yaml` for new one-time-use posts. (not yet implemented)
 * `format.yaml` to improve the post formatting.
 
 # TODO
 
 * One-time-use Timed posts `once.yaml`
-  * By post immediately before date
-  * By post immediately after date
-  * By counter value
-  * Move from `once.yaml` to `once-used.yaml`
+  * For posting immediately before date
+  * For posting immediately after date
+  * When the counter is at a set value
+  * Move from `once.yaml` to `once-used.yaml` if not `keep: true`
+  * Move from `once.yaml` to the end of `posts.yaml` if `keep: true`
