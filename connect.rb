@@ -40,9 +40,9 @@ rescue
 end
 
 ## Override for testing
-def connect_and_post(access_conf, title, text)
-  puts "Would have posted #{title} at #{Time.now}\n\n#{text}"
-end
+# def connect_and_post(access_conf, title, text, flair)
+#   puts "Would have posted #{title} at #{Time.now}\n\n#{text} with flair: #{flair}"
+# end
 
 # Helper for connect_and_post;
 # performs the action in the block until it is successful;
