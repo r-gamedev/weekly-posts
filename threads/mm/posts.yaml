@@ -1,7 +1,7 @@
-# When no other posts matches, one of these will be chosen by module on counter
-- variables:
-    tagline: nothing nothing
-    question: nothing nothing nothing
+---
 - variables:
     tagline: nothing nothingg
     question: nothing nothing
+- variables:
+    tagline: nothing nothing
+    question: nothing nothing nothing
