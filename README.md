@@ -25,6 +25,8 @@ Modify the appropriate file and submit a pull request.
   * set `again` to have the post remain in `once.yaml` once used. Moved to `once-used.yaml` otherwise.
 * `format.yaml` to improve the post formatting.
 
+(Optional) Run `validate.rb` before submitting to confirm all your changes are good to go.
+
 # TODO
 
 * Testing
