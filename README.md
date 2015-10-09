@@ -8,7 +8,7 @@ It automatically schedules posts, one post type per `/threads` folder. It determ
 
 `format.md` and title variables are gathered from  `internal.yaml`, `posts.yaml > [selected] > variables`, and `conf.yaml`. With the priority in that order. The variables are used replace the `%{name}` counterparts in `format.yaml` and `conf.yaml`'s title.
 
-# Contributing: Submitting your own post title, question, etc
+# Contributing (post titles, bonus question, formatting, etc)
 
 Modify the appropriate file (probably `posts.yaml`) and submit a pull request, or [message /r/gamedev](https://www.reddit.com/message/compose?to=%2Fr%2Fgamedev).
 
