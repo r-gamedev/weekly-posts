@@ -1,4 +1,5 @@
-when: '0:00 GMT-0700'                               # The time the post should go live
+when: '21:15 GMT-0700'                               # The time the post should go live
+daily: true                                         # Forces the thread to occupy the second slot
 time-variance: 0                                    # How many minutes should the live time vary?
 title: "It's the /r/gamedev daily random discussion thread for %{today}"  # The title, %{variables} will be gsubbed with their corresponding value
 flair: Daily                                        # The flair to give the post

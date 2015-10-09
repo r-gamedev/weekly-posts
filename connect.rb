@@ -4,14 +4,12 @@ require 'pry'
 def connect_and_post(access_conf, title, text, flair)
   r = Redd.it(:script, 
     access_conf['client_id'],
-    access_conf['secret'],
+    access_conf['client_secret'],
     access_conf['username'],
     access_conf['password'],
     user_agent: access_conf['useragent'])
 
-  connect_and_post_wrap { r.authorize! }
-
-  subreddit = r.subreddit_from_name("gdevcss")#"gamedev")#"bottesting")
+  subreddit = r.subreddit_from_name("gamedev")#"bottesting")
 
   post = nil
   dd = nil
@@ -19,10 +17,6 @@ def connect_and_post(access_conf, title, text, flair)
 
   connect_and_post_wrap do
     post = subreddit.submit(title, text: text)
-  end
-
-  connect_and_post_wrap do
-    post = r.from_fullname(post.name).first
   end
 
   connect_and_post_wrap do
@@ -38,7 +32,7 @@ def connect_and_post(access_conf, title, text, flair)
       p.unset_sticky
     end
     post.set_sticky
-    subreddit.set_flair(post, nil, flair)
+    post.set_flair(flair)
     dd.set_sticky
   end
 rescue
@@ -62,4 +56,6 @@ rescue Redd::Error => error
   # 5-something errors are usually errors on reddit's end.
   raise error unless (500...600).include?(error.code)
   retry
+rescue
+  binding.pry
 end
