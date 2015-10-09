@@ -17,14 +17,18 @@ Posts to /r/gamedev when the chosen time has arrived, replacing the currently st
 Modify the appropriate file and submit a pull request.
 
 * `posts.yaml` for new regular posts.
-* `once.yaml` for new one-time-use posts. (not yet implemented)
+* `once.yaml` for new one-time-use posts. (not yet tested)
+  * set `on-counter` to have the post show up when the counter is a certain value
+  * set `before-date` to have the post show up within the week before the given date
+  * set `after-date` to have the post show up within the week after the given date
+  * set `keep` to have the post move to `posts.yaml` once used. Moved to `once-used.yaml` otherwise.
+  * set `again` to have the post remain in `once.yaml` once used. Moved to `once-used.yaml` otherwise.
 * `format.yaml` to improve the post formatting.
 
 # TODO
 
-* One-time-use Timed posts `once.yaml`
-  * For posting immediately before date
-  * For posting immediately after date
-  * When the counter is at a set value
-  * Move from `once.yaml` to `once-used.yaml` if not `keep: true`
-  * Move from `once.yaml` to the end of `posts.yaml` if `keep: true`
+* Testing
+  * All.
+  * The.
+  * Things.
+  * *(except posts.yaml)*
