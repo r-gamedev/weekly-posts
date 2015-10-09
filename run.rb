@@ -49,6 +49,7 @@ def register_dir(dir)
     make_post(dir);
   end
 rescue
+  connect_and_error(@access_conf, "Error registering #{dir}. Waiting at console.")
   binding.pry
 end
 
@@ -59,6 +60,7 @@ def schedule(time)
     yield
   end
 rescue
+  connect_and_error(@access_conf, "Error scheduling time. Waiting at console.")
   binding.pry
 end
 
@@ -129,7 +131,7 @@ def make_post(dir)
     File.open("#{dir}/once.yaml", "w") { |f| f.write once.to_yaml }
   else # if we didn't find one, grab one from posts
     if posts.empty?
-      post = {"variables": {}}
+      post = {"variables"=> {}}
     else
       # take the first element and move it to the end, save the change
       post = posts.shift
@@ -152,7 +154,7 @@ def make_post(dir)
   internal["counter"] += 1;
   File.open("#{dir}/internal.yaml", "w") { |f| f.write internal.to_yaml }
 
-  connect_and_post(@access_conf, title, text, config["flair"])
+  connect_and_post(@access_conf, title, text, config["flair"], config["daily"])
 
   # save the changes to the git
   `git pull`
@@ -165,6 +167,7 @@ def make_post(dir)
     register_dir(dir)
   end
 rescue
+  connect_and_error(@access_conf, "Error posting from #{dir}. Waiting at console.")
   binding.pry
 end
 
@@ -173,9 +176,16 @@ end
 ################################################################################
 
 # register the date-times
-# register()
+register()
 
-make_post('threads/mm')
+# make_post('threads/mm')
+
+
+# connect_and_post(@access_conf, "FF Test 2", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque porttitor ligula ut posuere tincidunt. Donec suscipit dapibus augue non mollis. Cras aliquam enim quis justo aliquet semper. Mauris id semper lorem. Pellentesque id libero metus. Nam sagittis, arcu in vehicula viverra, purus massa semper diam, vel consectetur metus elit sed turpis. Phasellus laoreet malesuada lorem, eget posuere erat laoreet et. In blandit blandit orci ut hendrerit. In vitae lorem nec massa efficitur dictum.
+
+# Nulla facilisis facilisis volutpat. Ut ultrices, justo sit amet pulvinar imperdiet, orci enim iaculis lorem, ut rutrum est enim a diam. Donec nunc massa, elementum quis eleifend ac, egestas ac felis. Morbi sodales urna vel pretium varius. Nullam quis mi a ante aliquam euismod ut nec nisi. Nam egestas, nibh sit amet ultrices dapibus, nibh dolor scelerisque turpis, sed tristique dolor ligula vitae dolor. Curabitur gravida lorem tortor, eget vehicula lacus viverra nec. Integer commodo pulvinar nibh, eget sollicitudin ante dignissim eget. Morbi consectetur orci eu velit vestibulum tristique.", "FF")
+
+# connect_and_error(@access_conf, "Error test.")
 
 # wait
 binding.pry

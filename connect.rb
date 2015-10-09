@@ -1,22 +1,33 @@
 require 'pry'
 
+SUBREDDIT = "gdevcss"#"gamedev")#"bottesting")
 # Connect to reddit and make the post.
-def connect_and_post(access_conf, title, text, flair)
+def connect_and_post(access_conf, title, text, flair, daily)
   r = Redd.it(:script, 
     access_conf['client_id'],
-    access_conf['client_secret'],
+    access_conf['secret'],
     access_conf['username'],
     access_conf['password'],
     user_agent: access_conf['useragent'])
 
-  subreddit = r.subreddit_from_name("gamedev")#"bottesting")
+  connect_and_post_wrap { r.authorize! }
+
+  subreddit = r.subreddit_from_name(SUBREDDIT)
 
   post = nil
-  dd = nil
+  other = nil
   hot = nil
 
   connect_and_post_wrap do
     post = subreddit.submit(title, text: text)
+  end
+
+  connect_and_post_wrap do
+    post = r.from_fullname(post.name).first
+  end
+
+  connect_and_post_wrap do
+    post.approve!
   end
 
   connect_and_post_wrap do
@@ -25,15 +36,43 @@ def connect_and_post(access_conf, title, text, flair)
 
   stickied = hot.select { |p| p[:stickied]}
 
-  dd = stickied.select { |p| p.title.include? "It's the /r/gamedev daily random discussion thread for" }.first
+  if daily
+    other = stickied.select { |p| !p.title.include? "It's the /r/gamedev daily random discussion thread for" }.first
+  else
+    other = stickied.select { |p| p.title.include? "It's the /r/gamedev daily random discussion thread for" }.first
+  end
 
   connect_and_post_wrap do
     stickied.each do |p|
       p.unset_sticky
     end
-    post.set_sticky
-    post.set_flair(flair)
-    dd.set_sticky
+    if daily
+      other.set_sticky
+      post.set_sticky
+    else
+      post.set_sticky
+      other.set_sticky
+    end
+    subreddit.set_flair(post, nil, flair)
+  end
+rescue
+  binding.pry
+end
+
+
+def connect_and_error(access_conf, error)
+  r = Redd.it(:script, 
+    access_conf['client_id'],
+    access_conf['secret'],
+    access_conf['username'],
+    access_conf['password'],
+    user_agent: access_conf['useragent'])
+
+  connect_and_post_wrap { r.authorize! }
+
+  connect_and_post_wrap do
+    subreddit = r.subreddit_from_name(SUBREDDIT)#"gamedev")#"bottesting")
+    subreddit.send_message("Error in Weekly Autoposter", "#{Time.now}\n\n#{error}")
   end
 rescue
   binding.pry
@@ -56,6 +95,4 @@ rescue Redd::Error => error
   # 5-something errors are usually errors on reddit's end.
   raise error unless (500...600).include?(error.code)
   retry
-rescue
-  binding.pry
 end
