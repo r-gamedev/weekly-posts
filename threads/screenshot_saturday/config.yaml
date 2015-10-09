@@ -1,0 +1,9 @@
+when: 'friday 20:00 GMT-0700'                       # The time the post should go live
+time-variance: 20                                   # How many minutes should the live time vary?
+title: "Screenshot Saturday #%{counter} - %{tagline}"  # The title, %{variables} will be gsubbed with their corresponding value
+flair: SSS                                          # The flair to give the post
+variables:                                          # Some default variables. Overwrite them in each entry---
+  tagline: Now with 100% more automation!
+  question: |
+    No question?! Submit a question at [the bot's github](https://github.com/r-gamedev/weekly-posts)
+  extra: ""

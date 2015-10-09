@@ -1,0 +1,6 @@
+when: '0:00 GMT-0700'                               # The time the post should go live
+time-variance: 0                                    # How many minutes should the live time vary?
+title: "It's the /r/gamedev daily random discussion thread for %{today}"  # The title, %{variables} will be gsubbed with their corresponding value
+flair: Daily                                        # The flair to give the post
+variables:                                          # Some default variables. Overwrite them in each entry
+  tagline: ''

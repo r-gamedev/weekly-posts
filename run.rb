@@ -43,7 +43,7 @@ end
 def register_dir(dir)
   return if dir.downcase.include? 'example'
   config = YAML.load_file("#{dir}/config.yaml")
-  time = date_of_next( "#{config['day']} #{config['time']}")
+  time = date_of_next( "#{config['when']}")
   time += (rand(2*config['time-variance']) - config['time-variance']) / (24.0 * 60.0)
   schedule time do
     make_post(dir);
@@ -66,9 +66,9 @@ def pop_appropriate_post(once, counter)
   selected_index = nil
   once.each_with_index do |item, index|
 
-    before = DateTime.parse(item["before-date"])
-    after = DateTime.after(item["after-date"])
-    on_counter = item["on-counter"]
+    before = DateTime.parse(item["before_date"]) if item["before_date"]
+    after = DateTime.after(item["after_date"]) if item["after_date"]
+    on_counter = item["on_counter"] if item["on_counter"]
 
     if counter == on_counter
       selected_index = index
@@ -118,7 +118,7 @@ def make_post(dir)
       post.delete("on-counter")
       if post["keep"] # onward to posts.yaml
         posts.push post
-        poasts.delete("keep")
+        posts.delete("keep")
         File.open("#{dir}/posts.yaml", "w") { |f| f.write posts.to_yaml }
       else #onward to once-used.yaml
         poasts.delete("keep")
@@ -128,15 +128,20 @@ def make_post(dir)
     end
     File.open("#{dir}/once.yaml", "w") { |f| f.write once.to_yaml }
   else # if we didn't find one, grab one from posts
-    # take the first element and move it to the end, save the change
-    post = posts.shift
-    post["last-used-on"] = Time.now.to_s
-    posts.push post
-    File.open("#{dir}/posts.yaml", "w") { |f| f.write posts.to_yaml }
+    if posts.empty?
+      post = {"variables": {}}
+    else
+      # take the first element and move it to the end, save the change
+      post = posts.shift
+      post["last-used-on"] = Time.now.to_s
+      posts.push post
+      File.open("#{dir}/posts.yaml", "w") { |f| f.write posts.to_yaml }
+    end
   end
 
   # generate variables
   variables = config["variables"].merge(post["variables"]).merge(internal)
+      variables["today"] = DateTime.now.strftime("%Y-%m-%d")
 
   #symbolize the hash
   variables = variables.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
