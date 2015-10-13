@@ -17,10 +17,11 @@ require './connect.rb'
 
 # The DateTime of the next date matching day.
 # ex: date_of_next("Tuesday 19:00")
-def date_of_next(day)
+def date_of_next(day, daily=false)
   date  = DateTime.parse(day)
-  delta = date > DateTime.now ? 0 : 7
-  date + delta
+  delta = date > DateTime.now ? 0 : 1
+  delta *= 7 unless daily
+  date + delta 
 end
 ################################################################################
 
@@ -43,11 +44,13 @@ end
 def register_dir(dir)
   return if dir.downcase.include? 'example'
   config = YAML.load_file("#{dir}/config.yaml")
-  time = date_of_next( "#{config['when']}")
+  time = date_of_next( "#{config['when']}", config["daily"])
   time += (rand(2*config['time-variance']) - config['time-variance']) / (24.0 * 60.0)
-  schedule time do
+  res = schedule time do
     make_post(dir);
   end
+  puts config['title'], res, time, ""
+  res
 rescue
   connect_and_error(@access_conf, "Error registering #{dir}. Waiting at console.")
   binding.pry
@@ -143,7 +146,7 @@ def make_post(dir)
 
   # generate variables
   variables = config["variables"].merge(post["variables"]).merge(internal)
-      variables["today"] = DateTime.now.strftime("%Y-%m-%d")
+  variables["today"] = DateTime.now.strftime("%Y-%m-%d")
 
   #symbolize the hash
   variables = variables.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
@@ -163,7 +166,7 @@ def make_post(dir)
   `git push`
 
   # reschedule
-  @scheduler.in '1m', overlap: false do
+  @scheduler.in( ((2 * config["time-variance"] + 10) + 'm'), overlap: false )do
     register_dir(dir)
   end
 rescue

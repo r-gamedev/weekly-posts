@@ -1,5 +1,5 @@
 when: 'monday 18:00 GMT-0700'                       # The time the post should go live
-time-variance: 20                                   # How many minutes should the live time vary?
+time-variance:  0                                   # How many minutes should the live time vary?
 title: "Marketing Monday #%{counter} - %{tagline}"  # The title, %{variables} will be gsubbed with their corresponding value
 flair: MM                                           # The flair to give the post
 variables:                                          # Some default variables. Overwrite them in each entry
