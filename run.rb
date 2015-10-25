@@ -166,7 +166,7 @@ def make_post(dir)
   `git push`
 
   # reschedule
-  @scheduler.in( ((2 * config["time-variance"] + 10) + 'm'), overlap: false )do
+  @scheduler.in( ((2 * config["time-variance"].to_i + 10).to_s + 'm'), overlap: false )do
     register_dir(dir)
   end
 rescue

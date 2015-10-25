@@ -1,6 +1,7 @@
 require 'pry'
 
-SUBREDDIT = "gdevcss"#"gamedev")#"bottesting")
+SUBREDDIT = "gamedev"
+OWNER = "lemtzas"
 # Connect to reddit and make the post.
 def connect_and_post(access_conf, title, text, flair, daily)
   r = Redd.it(:script, 
@@ -73,6 +74,11 @@ def connect_and_error(access_conf, error)
   connect_and_post_wrap do
     subreddit = r.subreddit_from_name(SUBREDDIT)#"gamedev")#"bottesting")
     subreddit.send_message("Error in Weekly Autoposter", "#{Time.now}\n\n#{error}")
+  end
+
+  connect_and_post_wrap do
+    owner = r.user_from_name(OWNER)#"gamedev")#"bottesting")
+    owner.send_message("Error in Weekly Autoposter", "#{Time.now}\n\n#{error}")
   end
 rescue
   binding.pry

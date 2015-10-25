@@ -46,6 +46,7 @@ def validate_one(dir)
   time, variables = nil, nil
 
   # config validation
+  raise "Could not convert config['time-variance'] to integer" unless config["time-variance"].to_i
   raise "Flair blank." unless config['flair'] and not config['flair'].empty?
   raise "Title blank." unless config['title'] and not config['title'].empty?
   raise "When blank." unless config['when'] and not config['when'].empty?
