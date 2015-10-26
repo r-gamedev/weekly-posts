@@ -10,7 +10,7 @@ It automatically schedules posts, one post type per `/threads` folder. It determ
 
 # Contributing (post titles, bonus question, formatting, etc)
 
-Modify the appropriate file (probably `posts.yaml`) and submit a pull request, or [message /r/gamedev](https://www.reddit.com/message/compose?to=%2Fr%2Fgamedev).
+Modify the appropriate file (probably `posts.yaml`) and submit a pull request, or [message /r/gamedev](https://www.reddit.com/message/compose?to=%2Fr%2Fgamedev), or [fill out this form](https://docs.google.com/forms/d/1ce7sbdm-D_PJy3WC5FAbpZ6KprBKW4OcSL0hLxUvoQE/viewform).
 
 (Optional) Run `validate.rb` before submitting to confirm all your changes are good to go.
 
