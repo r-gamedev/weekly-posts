@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 when: 'thursday 20:20 GMT-0700'                     # The time the post should go live
+=======
+when: 'thursday 20:00 GMT-0700'                     # The time the post should go live
+>>>>>>> 0b514ca4fc07fed72bb3ebd9e3b8274d45f2dcb4
 time-variance: 20                                   # How many minutes should the live time vary?
 title: "Feedback Friday #%{counter} - %{tagline}"   # The title, %{variables} will be gsubbed with their corresponding value
 flair: FF                                           # The flair to give the post
