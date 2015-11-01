@@ -1,5 +1,6 @@
 ---
 - variables:
     tagline: Now with 100% more automation!
-    question: No question?! Submit a question at [the bot's github](https://github.com/r-gamedev/weekly-posts) or [this form](https://docs.google.com/forms/d/1ce7sbdm-D_PJy3WC5FAbpZ6KprBKW4OcSL0hLxUvoQE/viewform)
-  last-used-on: '2015-10-24 19:47:00 -0700'
+    question: No question?! Submit a question at [the bot's github](https://github.com/r-gamedev/weekly-posts)
+      or [this form](https://docs.google.com/forms/d/1ce7sbdm-D_PJy3WC5FAbpZ6KprBKW4OcSL0hLxUvoQE/viewform)
+  last-used-on: '2015-10-31 19:54:00 -0700'
