@@ -66,7 +66,10 @@ def validate_one(dir)
   posts.each do |post|
     # try generating variables
     begin
+      tagline = ""
+      tagline = " - " + post["variables"]["tagline"] if post["variables"]["tagline"]
       variables = config["variables"].merge(post["variables"]).merge(internal)
+      variables["tagline"] = tagline
       variables["today"] = DateTime.now.strftime("%Y-%m-%d")
       variables = variables.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
     rescue # could not generate variables

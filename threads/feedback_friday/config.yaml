@@ -1,6 +1,6 @@
 when: 'thursday 20:00 GMT-0800'                     # The time the post should go live
 time-variance: 20                                   # How many minutes should the live time vary?
-title: "Feedback Friday #%{counter} - %{tagline}"   # The title, %{variables} will be gsubbed with their corresponding value
+title: "Feedback Friday #%{counter}%{tagline}"      # The title, %{variables} will be gsubbed with their corresponding value
 flair: FF                                           # The flair to give the post
 variables:                                          # Some default variables. Overwrite them in each entry
   tagline: Now with 100% more automation!

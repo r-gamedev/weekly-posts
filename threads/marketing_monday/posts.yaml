@@ -1,6 +1,6 @@
 ---
 - variables:
-    tagline: Now with 100% more automation!
+    tagline: false
     question: No question?! Submit a question at [the bot's github](https://github.com/r-gamedev/weekly-posts)
       or [this form](https://docs.google.com/forms/d/1ce7sbdm-D_PJy3WC5FAbpZ6KprBKW4OcSL0hLxUvoQE/viewform)
   last-used-on: '2015-12-27 20:11:00 -0800'
